@@ -7,9 +7,9 @@ import ErrorIndicator from '../error-indicator';
 import './app.css';
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundary from '../error-boundary/error-boundary';
-import Row from '../row';
 import ItemDetails, {Record} from '../item-details/item-details';
-import ItemList from '../item-list/item-list';
+import { PersonList, PlanetList, StarshipList } from '../sw-components/item-lists';
+import { PersonDetails, PlanetDetails, StarshipDetails } from '../sw-components/details';
 
 export default class App extends Component {
 
@@ -64,14 +64,20 @@ export default class App extends Component {
       <div className="stardb-app">
         <Header />
 
-        <ItemList
-          getData={getAllPeople}
-          onItemSelected={() => {}}>
+        <PersonDetails itemId={11}/>
+        <PlanetDetails itemId={5}/>
+        <StarshipDetails itemId={9}/>
 
+        <PersonList>
           { ({name}) => <span>{name}</span> }
-        </ItemList>
-        
-        <Row left={personDetails} right={starshipDetails} />
+        </PersonList>
+        <PlanetList>
+          { ({name}) => <span>{name}</span> }
+        </PlanetList>
+        <StarshipList>
+          { ({name}) => <span>{name}</span> }
+        </StarshipList>
+
       </div>
       </ErrorBoundary>
     );
