@@ -7,7 +7,6 @@ import ErrorIndicator from '../error-indicator';
 import './app.css';
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundary from '../error-boundary/error-boundary';
-import ItemDetails, {Record} from '../item-details/item-details';
 import { PersonList, PlanetList, StarshipList } from '../sw-components/item-lists';
 import { PersonDetails, PlanetDetails, StarshipDetails } from '../sw-components/details';
 
@@ -42,31 +41,14 @@ export default class App extends Component {
       <RandomPlanet/> :
       null;
 
-    const {getAllPeople, getPerson, getStarship, getPlanet, getPersonImage, getStarshipImage, getPlanetsImage} = this.swapiService;
-
-    const personDetails = (
-      <ItemDetails itemId={11} getData={getPerson} getImageUrl={getPersonImage} >
-        <Record field="gender" label="Gender"/>
-        <Record field="eyeColor" label="Eye Color"/>
-      </ItemDetails>
-    );
-
-    const starshipDetails = (
-      <ItemDetails itemId={5} getData={getStarship} getImageUrl={getStarshipImage}>
-        <Record field="model" label="Model"/>
-        <Record field="length" label="Length"/>
-        <Record field="costInCredits" label="Cost"/>
-      </ItemDetails>
-    );
-
     return (
       <ErrorBoundary>
       <div className="stardb-app">
         <Header />
 
         <PersonDetails itemId={11}/>
-        <PlanetDetails itemId={5}/>
-        <StarshipDetails itemId={9}/>
+        <PlanetDetails itemId={3}/>
+        <StarshipDetails itemId={5}/>
 
         <PersonList>
           { ({name}) => <span>{name}</span> }
