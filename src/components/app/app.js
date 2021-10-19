@@ -10,6 +10,8 @@ import ErrorBoundary from '../error-boundary/error-boundary';
 import { PersonList, PlanetList, StarshipList } from '../sw-components/item-lists';
 import { PersonDetails, PlanetDetails, StarshipDetails } from '../sw-components/details';
 
+import { SwapiServiceProvider } from '../swapi-service-context';
+
 export default class App extends Component {
 
   swapiService = new SwapiService();
@@ -43,18 +45,20 @@ export default class App extends Component {
 
     return (
       <ErrorBoundary>
-      <div className="stardb-app">
-        <Header />
+        <SwapiServiceProvider value={this.swapiService} >
+          <div className="stardb-app">
+            <Header />
 
-        <PersonDetails itemId={11}/>
-        <PlanetDetails itemId={3}/>
-        <StarshipDetails itemId={5}/>
+            <PersonDetails itemId={11}/>
+            <PlanetDetails itemId={3}/>
+            <StarshipDetails itemId={5}/>
 
-        <PersonList />
-        <PlanetList />
-        <StarshipList />
+            <PersonList />
+            <PlanetList />
+            <StarshipList />
 
-      </div>
+          </div>
+      </SwapiServiceProvider>
       </ErrorBoundary>
     );
   }
