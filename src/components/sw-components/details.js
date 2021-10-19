@@ -1,27 +1,63 @@
-import React from "react";
-import SwapiService from "../../services/swapi-service";
-import withDetails from "../hoc-helpers/with-details";
-import ItemDetails from "../item-details/item-details";
-import { SwapiServiceConsumer } from "../swapi-service-context";
+import React from 'react';
+
+import ItemDetails, { Record } from '../item-details';
+import SwapiService from '../../services/swapi-service';
 
 const swapiService = new SwapiService();
 
-const {getPlanet, getStarship, getPlanetsImage, getStarshipImage } = swapiService;
+const {
+  getPerson,
+  getPlanet,
+  getStarship,
+  getPersonImage,
+  getPlanetImage,
+  getStarshipImage
+} = swapiService;
 
-const PersonDetails = () => {
-    return (<SwapiServiceConsumer>
-            {
-              ({ getPerson, getPersonImage }) => {
-                return withDetails(ItemDetails, getPerson, getPersonImage);
-              }
-            }
-    </SwapiServiceConsumer>);
+const PersonDetails = ({ itemId }) => {
+
+  return (
+    <ItemDetails
+      itemId={itemId}
+      getData={getPerson}
+      getImageUrl={getPersonImage} >
+
+      <Record field="gender" label="Gender" />
+      <Record field="eyeColor" label="Eye Color" />
+    </ItemDetails>
+  );
 };
-const PlanetDetails = withDetails(ItemDetails, getPlanet, getPlanetsImage);
-const StarshipDetails = withDetails(ItemDetails, getStarship, getStarshipImage);
+
+const PlanetDetails = ({ itemId }) => {
+  return (
+    <ItemDetails
+      itemId={itemId}
+      getData={getPlanet}
+      getImageUrl={getPlanetImage}>
+
+      <Record field="population" label="Population" />
+      <Record field="rotationPeriod" label="Rotation Period" />
+      <Record field="diameter" label="Diameter" />
+    </ItemDetails>
+  );
+};
+
+const StarshipDetails = ({ itemId }) => {
+  return (
+    <ItemDetails
+      itemId={itemId}
+      getData={getStarship}
+      getImageUrl={getStarshipImage}>
+
+      <Record field="model" label="Model" />
+      <Record field="length" label="Length" />
+      <Record field="costInCredits" label="Cost" />
+    </ItemDetails>
+  );
+};
 
 export {
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails
 };

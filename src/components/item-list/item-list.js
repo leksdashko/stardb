@@ -24,6 +24,6 @@ const ItemList = (props) => {
       {items}
     </ul>
   );
-}
+};
 
 export default ItemList;
